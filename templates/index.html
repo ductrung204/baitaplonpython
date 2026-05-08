@@ -1,0 +1,178 @@
+{% extends "layout.html" %}
+
+{% block title %}Tổng quan - LUXURY CAR{% endblock %}
+
+{% block page_title %}🏎️ Welcome Back, {{ user.name }}{% endblock %}
+
+{% block content %}
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-info">
+            <h4>TỔNG DOANH THU</h4>
+            <h2 class="counter">{{ "{:,.0f}".format(stats.total_revenue) }}đ</h2>
+        </div>
+        <div class="stat-icon">
+            <i class="fas fa-chart-line"></i>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-info">
+            <h4>XE ĐÃ BÁN</h4>
+            <h2 class="counter">{{ stats.total_cars_sold }}</h2>
+        </div>
+        <div class="stat-icon">
+            <i class="fas fa-car"></i>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-info">
+            <h4>HÓA ĐƠN</h4>
+            <h2 class="counter">{{ stats.total_invoices }}</h2>
+        </div>
+        <div class="stat-icon">
+            <i class="fas fa-file-invoice"></i>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-info">
+            <h4>KHÁCH HÀNG VIP</h4>
+            <h2 class="counter">{{ stats.total_customers }}</h2>
+        </div>
+        <div class="stat-icon">
+            <i class="fas fa-crown"></i>
+        </div>
+    </div>
+</div>
+
+<div class="data-card">
+    <div class="card-header">
+        <h3><i class="fas fa-chart-line"></i> Biểu đồ doanh thu 2024</h3>
+        <span class="badge badge-success"><i class="fas fa-chart-simple"></i> +23.5% so với năm trước</span>
+    </div>
+    <canvas id="revenueChart" height="100"></canvas>
+</div>
+
+<div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+    <div class="data-card">
+        <div class="card-header">
+            <h3><i class="fas fa-trophy"></i> Top xe bán chạy</h3>
+            <i class="fas fa-fire" style="color: #f39c12;"></i>
+        </div>
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã xe</th>
+                        <th>Tên xe</th>
+                        <th>Số lượng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for car_id, qty in stats.top_cars %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td><strong>{{ car_id }}</strong></td>
+                        <td>
+                            {% for car in all_cars %}
+                                {% if car.id == car_id %}
+                                    {{ car.name }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td><span class="badge badge-success">{{ qty }} xe</span></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4">Chưa có dữ liệu</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="data-card">
+        <div class="card-header">
+            <h3><i class="fas fa-star"></i> Khách hàng thân thiết</h3>
+            <i class="fas fa-gem" style="color: #e74c3c;"></i>
+        </div>
+        <div class="data-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã KH</th>
+                        <th>Tên KH</th>
+                        <th>Tổng chi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cus in stats.top_customers %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ cus.id }}</td>
+                        <td>{{ cus.name }}</td>
+                        <td>{{ "{:,.0f}".format(cus.total_spent) }}đ</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4">Chưa có dữ liệu</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Revenue Chart
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'],
+            datasets: [{
+                label: 'Doanh thu (triệu đồng)',
+                data: [85, 120, 95, 150, 180, 220, 280, 310, 295, 340, 380, 420],
+                borderColor: '#667eea',
+                backgroundColor: 'rgba(102,126,234,0.1)',
+                borderWidth: 3,
+                tension: 0.4,
+                fill: true,
+                pointBackgroundColor: '#667eea',
+                pointBorderColor: '#fff',
+                pointRadius: 6,
+                pointHoverRadius: 10
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    labels: { color: '#fff' }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.raw + ' triệu đồng';
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    grid: { color: 'rgba(255,255,255,0.1)' },
+                    ticks: { color: '#fff' }
+                },
+                x: {
+                    grid: { color: 'rgba(255,255,255,0.1)' },
+                    ticks: { color: '#fff' }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

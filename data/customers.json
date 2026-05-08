@@ -1,0 +1,138 @@
+[
+    {
+        "id": "KH001",
+        "name": "Nguyễn Văn A",
+        "phone": "0901234567",
+        "address": "Hà Nội",
+        "email": "nguyenvana@email.com",
+        "total_spent": 7150000000
+    },
+    {
+        "id": "KH002",
+        "name": "Trần Thị B",
+        "phone": "0987654321",
+        "address": "TP.HCM",
+        "email": "tranthib@email.com",
+        "total_spent": 48.0
+    },
+    {
+        "id": "KH003",
+        "name": "Mai Đức Trung",
+        "phone": "0867965326",
+        "address": "Thanh Hóa",
+        "email": "trung@gmail.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP003",
+        "name": "Lê Hoàng Cường",
+        "phone": "0903333444",
+        "address": "3 Bạch Đằng, Hải Phòng",
+        "email": "cuong.le@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP004",
+        "name": "Phạm Minh Đức",
+        "phone": "0904444555",
+        "address": "4 Võ Nguyên Giáp, Đà Nẵng",
+        "email": "duc.pham@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP005",
+        "name": "Ngô Thị Hoa",
+        "phone": "0905555666",
+        "address": "5 Nguyễn Huệ, Nha Trang",
+        "email": "hoa.ngo@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP006",
+        "name": "Vũ Văn Hải",
+        "phone": "0911111222",
+        "address": "6 Trần Hưng Đạo, HN",
+        "email": "hai.vu@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP007",
+        "name": "Đặng Thị Hạnh",
+        "phone": "0912222333",
+        "address": "7 Nguyễn Trãi, TP.HCM",
+        "email": "hanh.dang@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP008",
+        "name": "Bùi Quang Huy",
+        "phone": "0913333444",
+        "address": "8 Lý Thường Kiệt, Đà Nẵng",
+        "email": "huy.bui@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP009",
+        "name": "Đỗ Thị Lan",
+        "phone": "0914444555",
+        "address": "9 Hùng Vương, Cần Thơ",
+        "email": "lan.do@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP010",
+        "name": "Hoàng Văn Long",
+        "phone": "0915555666",
+        "address": "10 Ngô Quyền, Vũng Tàu",
+        "email": "long.hoang@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP011",
+        "name": "Phan Thị Mai",
+        "phone": "0916666777",
+        "address": "11 Hai Bà Trưng, Huế",
+        "email": "mai.phan@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP012",
+        "name": "Trương Quốc Nam",
+        "phone": "0917777888",
+        "address": "12 Điện Biên Phủ, Nha Trang",
+        "email": "nam.truong@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP013",
+        "name": "Lý Thị Ngọc",
+        "phone": "0918888999",
+        "address": "13 Lê Đại Hành, Biên Hòa",
+        "email": "ngoc.ly@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP014",
+        "name": "Đinh Văn Phúc",
+        "phone": "0919999000",
+        "address": "14 Thống Nhất, Bình Dương",
+        "email": "phuc.dinh@luxury.com",
+        "total_spent": 18000000000.0
+    },
+    {
+        "id": "VIP015",
+        "name": "Vương Thị Quyên",
+        "phone": "0921111222",
+        "address": "15 Trường Chinh, Hải Dương",
+        "email": "quyen.vuong@luxury.com",
+        "total_spent": 0
+    },
+    {
+        "id": "VIP016",
+        "name": "Tạ Văn Sơn",
+        "phone": "0922222333",
+        "address": "16 Cách Mạng Tháng 8, HN",
+        "email": "son.ta@luxury.com",
+        "total_spent": 0
+    }
+]

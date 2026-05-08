@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block title %}Quản lý xe - LUXURY CAR{% endblock %}
+
+{% block page_title %}🚗 Luxury Fleet Management{% endblock %}
+
+{% block content %}
+<!-- Modal thêm xe -->
+<div class="modal" id="addCarModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-plus-circle"></i> Thêm xe mới</h3>
+            <button class="close-modal" onclick="closeModal('addCarModal')">&times;</button>
+        </div>
+        <form method="POST" action="/add_car">
+            <div class="form-group">
+                <label>Mã xe *</label>
+                <input type="text" name="id" placeholder="VD: LC001" required>
+            </div>
+            <div class="form-group">
+                <label>Tên xe *</label>
+                <input type="text" name="name" placeholder="VD: Lamborghini Huracan" required>
+            </div>
+            <div class="form-group">
+                <label>Hãng xe *</label>
+                <input type="text" name="brand" placeholder="VD: Lamborghini" required>
+            </div>
+            <div class="form-group">
+                <label>Năm sản xuất *</label>
+                <input type="number" name="year" placeholder="2024" required>
+            </div>
+            <div class="form-group">
+                <label>Giá nhập (VNĐ) *</label>
+                <input type="number" name="import_price" placeholder="18000000000" required>
+            </div>
+            <div class="form-group">
+                <label>Giá bán (VNĐ) *</label>
+                <input type="number" name="sell_price" placeholder="22000000000" required>
+            </div>
+            <div class="form-group">
+                <label>Số lượng *</label>
+                <input type="number" name="quantity" placeholder="3" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <i class="fas fa-save"></i> Thêm xe
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="data-card">
+    <div class="card-header">
+        <h3><i class="fas fa-car-side"></i> Danh sách xe hiện có</h3>
+        <button class="btn btn-primary" onclick="openModal('addCarModal')">
+            <i class="fas fa-plus"></i> Thêm xe
+        </button>
+    </div>
+    
+    <div class="search-box">
+        <form method="GET" action="/cars" style="display: flex; gap: 10px; width: 100%;">
+            <input type="text" name="search" placeholder="🔍 Tìm kiếm xe theo tên, hãng hoặc mã..." value="{{ search }}">
+            <button type="submit" class="btn btn-primary">Tìm</button>
+            {% if search %}
+                <a href="/cars" class="btn btn-outline">Xóa</a>
+            {% endif %}
+        </form>
+    </div>
+    
+    <div class="data-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã</th>
+                    <th>Tên xe</th>
+                    <th>Hãng</th>
+                    <th>Năm</th>
+                    <th>Giá bán</th>
+                    <th>Tồn kho</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in cars %}
+                <tr>
+                    <td><strong>{{ car.id }}</strong></td>
+                    <td>{{ car.name }}</td>
+                    <td><i class="fas fa-tag"></i> {{ car.brand }}</td>
+                    <td>{{ car.year }}</td>
+                    <td class="price">{{ "{:,.0f}".format(car.sell_price) }}đ</td>
+                    <td>{{ car.quantity }}</td>
+                    <td>
+                        {% if car.quantity == 0 %}
+                            <span class="badge badge-danger">🔴 Hết hàng</span>
+                        {% elif car.quantity < 3 %}
+                            <span class="badge badge-warning">🟡 Sắp hết</span>
+                        {% else %}
+                            <span class="badge badge-success">🟢 Còn hàng</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/delete_car/{{ car.id }}" onclick="return confirm('Xóa xe {{ car.name }}?')" style="color: #e74c3c; font-size: 18px;">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" style="text-align: center;">📭 Chưa có xe nào trong kho</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function openModal(id) {
+        document.getElementById(id).classList.add('active');
+    }
+    
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('active');
+    }
+    
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.classList.remove('active');
+        }
+    }
+</script>
+{% endblock %}

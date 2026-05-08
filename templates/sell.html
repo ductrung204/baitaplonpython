@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block title %}Bán hàng - LUXURY CAR{% endblock %}
+
+{% block page_title %}💰 Sales & Invoicing{% endblock %}
+
+{% block content %}
+<div class="data-card">
+    <div class="card-header">
+        <h3><i class="fas fa-receipt"></i> Tạo hóa đơn bán xe</h3>
+        <i class="fas fa-hand-holding-usd" style="font-size: 24px; color: #2ecc71;"></i>
+    </div>
+    
+    <form method="POST" action="/create_invoice">
+        <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); gap: 20px;">
+            <div class="form-group">
+                <label><i class="fas fa-user-tie"></i> Khách hàng VIP</label>
+                <select name="customer_id" class="form-control" required>
+                    <option value="">-- Chọn khách hàng --</option>
+                    {% if customers %}
+                        {% for cus in customers %}
+                        <option value="{{ cus.id }}">
+                            {{ cus.id }} - {{ cus.name }} ({{ cus.phone }})
+                        </option>
+                        {% endfor %}
+                    {% else %}
+                        <option disabled>Chưa có khách hàng, vui lòng thêm khách hàng trước</option>
+                    {% endif %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-car"></i> Chọn siêu xe</label>
+                <select name="car_id" class="form-control" required>
+                    <option value="">-- Chọn xe --</option>
+                    {% if cars %}
+                        {% for car in cars %}
+                        <option value="{{ car.id }}">
+                            {{ car.id }} - {{ car.name }} ({{ car.brand }}) - {{ "{:,.0f}".format(car.sell_price) }}đ - Tồn: {{ car.quantity }}
+                        </option>
+                        {% endfor %}
+                    {% else %}
+                        <option disabled>Chưa có xe, vui lòng thêm xe trước</option>
+                    {% endif %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-calculator"></i> Số lượng</label>
+                <input type="number" name="quantity" min="1" value="1" required>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn btn-primary" style="padding: 14px 50px; font-size: 16px;">
+                <i class="fas fa-check-circle"></i> TẠO HÓA ĐƠN NGAY
+            </button>
+        </div>
+    </form>
+    
+    <!-- Hiển thị thông báo nếu không có dữ liệu -->
+    {% if not customers or not cars %}
+    <div style="margin-top: 20px; padding: 15px; background: rgba(231,76,60,0.2); border-radius: 12px;">
+        <i class="fas fa-exclamation-triangle"></i>
+        <strong>Thiếu dữ liệu!</strong>
+        {% if not customers %} Vui lòng <a href="/customers" style="color: #f39c12;">thêm khách hàng</a> trước.{% endif %}
+        {% if not cars %} Vui lòng <a href="/cars" style="color: #f39c12;">thêm xe</a> trước.{% endif %}
+    </div>
+    {% endif %}
+    
+    <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+        <h4><i class="fas fa-info-circle"></i> Hướng dẫn nhanh:</h4>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+            <li>Chọn khách hàng từ danh sách VIP</li>
+            <li>Chọn siêu xe mà khách muốn mua</li>
+            <li>Nhập số lượng (kiểm tra tồn kho)</li>
+            <li>Click "TẠO HÓA ĐƠN" để hoàn tất</li>
+            <li>Hóa đơn sẽ tự động lưu vào thư mục invoices/</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Kiểm tra số lượng tồn kho khi chọn xe
+    const carSelect = document.querySelector('select[name="car_id"]');
+    const quantityInput = document.querySelector('input[name="quantity"]');
+    
+    if (carSelect) {
+        carSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const text = selectedOption.text;
+            const match = text.match(/Tồn: (\d+)/);
+            if (match) {
+                const stock = match[1];
+                quantityInput.max = stock;
+                quantityInput.placeholder = `Tồn: ${stock}`;
+            }
+        });
+    }
+</script>
+{% endblock %}

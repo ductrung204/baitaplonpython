@@ -1,0 +1,308 @@
+[
+    {
+        "id": "XE001",
+        "name": "Toyota Camry",
+        "brand": "Toyota",
+        "year": 2023,
+        "import_price": 700000000,
+        "sell_price": 850000000,
+        "quantity": 1
+    },
+    {
+        "id": "XE002",
+        "name": "Honda Civic",
+        "brand": "Honda",
+        "year": 2023,
+        "import_price": 600000000,
+        "sell_price": 750000000,
+        "quantity": 3
+    },
+    {
+        "id": "LC011",
+        "name": "Rolls-Royce Cullinan",
+        "brand": "Rolls-Royce",
+        "year": 2024,
+        "import_price": 40.0,
+        "sell_price": 48.0,
+        "quantity": 13
+    },
+    {
+        "id": "TOY001",
+        "name": "Toyota Camry 2.5Q",
+        "brand": "Toyota",
+        "year": 2024,
+        "import_price": 950000000.0,
+        "sell_price": 1150000000.0,
+        "quantity": 6
+    },
+    {
+        "id": "HON001",
+        "name": "Honda Civic RS",
+        "brand": "Honda",
+        "year": 2024,
+        "import_price": 720000000.0,
+        "sell_price": 880000000.0,
+        "quantity": 9
+    },
+    {
+        "id": "HON002",
+        "name": "Honda Accord",
+        "brand": "Honda",
+        "year": 2024,
+        "import_price": 1050000000.0,
+        "sell_price": 1250000000.0,
+        "quantity": 12
+    },
+    {
+        "id": "MAZ001",
+        "name": "Mazda 3 Premium",
+        "brand": "Mazda",
+        "year": 2024,
+        "import_price": 620000000.0,
+        "sell_price": 750000000.0,
+        "quantity": 14
+    },
+    {
+        "id": "MAZ002",
+        "name": "Mazda 6 Luxury",
+        "brand": "Mazda",
+        "year": 2024,
+        "import_price": 780000000.0,
+        "sell_price": 950000000.0,
+        "quantity": 15
+    },
+    {
+        "id": "KIA001",
+        "name": "KIA K3 GT",
+        "brand": "KIA",
+        "year": 2024,
+        "import_price": 530000000.0,
+        "sell_price": 650000000.0,
+        "quantity": 10
+    },
+    {
+        "id": "HYU001",
+        "name": "Hyundai Elantra",
+        "brand": "Hyundai",
+        "year": 2024,
+        "import_price": 590000000.0,
+        "sell_price": 720000000.0,
+        "quantity": 10
+    },
+    {
+        "id": "MIT001",
+        "name": "Mitsubishi Attrage",
+        "brand": "Mitsubishi",
+        "year": 2024,
+        "import_price": 390000000.0,
+        "sell_price": 480000000.0,
+        "quantity": 15
+    },
+    {
+        "id": "TOY002",
+        "name": "Toyota Corolla Cross",
+        "brand": "Toyota",
+        "year": 2024,
+        "import_price": 680000000.0,
+        "sell_price": 850000000.0,
+        "quantity": 12
+    },
+    {
+        "id": "TOY003",
+        "name": "Toyota Fortuner",
+        "brand": "Toyota",
+        "year": 2024,
+        "import_price": 1100000000.0,
+        "sell_price": 1350000000.0,
+        "quantity": 10
+    },
+    {
+        "id": "HON003",
+        "name": "Honda HR-V",
+        "brand": "Honda",
+        "year": 2024,
+        "import_price": 650000000.0,
+        "sell_price": 820000000.0,
+        "quantity": 11
+    },
+    {
+        "id": "HYU003",
+        "name": "Hyundai Tucson",
+        "brand": "Hyundai",
+        "year": 2024,
+        "import_price": 780000000.0,
+        "sell_price": 950000000.0,
+        "quantity": 8
+    },
+    {
+        "id": "HYU004",
+        "name": "Hyundai Santa Fe",
+        "brand": "Hyundai",
+        "year": 2024,
+        "import_price": 1100000000.0,
+        "sell_price": 1350000000.0,
+        "quantity": 16
+    },
+    {
+        "id": "KIA003",
+        "name": "KIA Seltos",
+        "brand": "KIA",
+        "year": 2024,
+        "import_price": 560000000.0,
+        "sell_price": 700000000.0,
+        "quantity": 15
+    },
+    {
+        "id": "KIA004",
+        "name": "KIA Sportage",
+        "brand": "KIA",
+        "year": 2024,
+        "import_price": 780000000.0,
+        "sell_price": 950000000.0,
+        "quantity": 15
+    },
+    {
+        "id": "FOR001",
+        "name": "Ford Territory",
+        "brand": "Ford",
+        "year": 2024,
+        "import_price": 680000000.0,
+        "sell_price": 850000000.0,
+        "quantity": 10
+    },
+    {
+        "id": "FOR002",
+        "name": "Ford Everest",
+        "brand": "Ford",
+        "year": 2024,
+        "import_price": 1050000000.0,
+        "sell_price": 1280000000.0,
+        "quantity": 10
+    },
+    {
+        "id": "MIT002",
+        "name": "Mitsubishi Xpander",
+        "brand": "Mitsubishi",
+        "year": 2024,
+        "import_price": 550000000.0,
+        "sell_price": 680000000.0,
+        "quantity": 15
+    },
+    {
+        "id": "FOR003",
+        "name": "Ford Ranger XLT",
+        "brand": "Ford",
+        "year": 2024,
+        "import_price": 780000000.0,
+        "sell_price": 950000000.0,
+        "quantity": 10
+    },
+    {
+        "id": "TOY005",
+        "name": "Toyota Hilux",
+        "brand": "Toyota",
+        "year": 2024,
+        "import_price": 720000000.0,
+        "sell_price": 880000000.0,
+        "quantity": 14
+    },
+    {
+        "id": "MIT004",
+        "name": "Mitsubishi Triton",
+        "brand": "Mitsubishi",
+        "year": 2024,
+        "import_price": 680000000.0,
+        "sell_price": 820000000.0,
+        "quantity": 9
+    },
+    {
+        "id": "HYU006",
+        "name": "Hyundai Santa Fe Pickup",
+        "brand": "Hyundai",
+        "year": 2024,
+        "import_price": 650000000.0,
+        "sell_price": 800000000.0,
+        "quantity": 5
+    },
+    {
+        "id": "LAM001",
+        "name": "Lamborghini Huracán EVO",
+        "brand": "Lamborghini",
+        "year": 2024,
+        "import_price": 18000000000.0,
+        "sell_price": 22000000000.0,
+        "quantity": 5
+    },
+    {
+        "id": "LAM002",
+        "name": "Lamborghini Revuelto",
+        "brand": "Lamborghini",
+        "year": 2024,
+        "import_price": 25000000000.0,
+        "sell_price": 30000000000.0,
+        "quantity": 7
+    },
+    {
+        "id": "FER001",
+        "name": "Ferrari SF90 Stradale",
+        "brand": "Ferrari",
+        "year": 2024,
+        "import_price": 25000000000.0,
+        "sell_price": 30000000000.0,
+        "quantity": 6
+    },
+    {
+        "id": "FER002",
+        "name": "Ferrari 296 GTB",
+        "brand": "Ferrari",
+        "year": 2024,
+        "import_price": 15000000000.0,
+        "sell_price": 19000000000.0,
+        "quantity": 5
+    },
+    {
+        "id": "POR001",
+        "name": "Porsche 911 Turbo S",
+        "brand": "Porsche",
+        "year": 2024,
+        "import_price": 12000000000.0,
+        "sell_price": 15000000000.0,
+        "quantity": 6
+    },
+    {
+        "id": "POR002",
+        "name": "Porsche 911 GT3 RS",
+        "brand": "Porsche",
+        "year": 2024,
+        "import_price": 17000000000.0,
+        "sell_price": 21000000000.0,
+        "quantity": 6
+    },
+    {
+        "id": "MCL001",
+        "name": "McLaren 720S",
+        "brand": "McLaren",
+        "year": 2024,
+        "import_price": 20000000000.0,
+        "sell_price": 25000000000.0,
+        "quantity": 3
+    },
+    {
+        "id": "MCL002",
+        "name": "McLaren Artura",
+        "brand": "McLaren",
+        "year": 2024,
+        "import_price": 14000000000.0,
+        "sell_price": 18000000000.0,
+        "quantity": 3
+    },
+    {
+        "id": "AST001",
+        "name": "Aston Martin DBS 770",
+        "brand": "Aston Martin",
+        "year": 2024,
+        "import_price": 18000000000.0,
+        "sell_price": 23000000000.0,
+        "quantity": 7
+    }
+]

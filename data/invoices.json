@@ -1,0 +1,72 @@
+[
+    {
+        "id": "HD0001",
+        "customer_id": "KH001",
+        "employee_id": "ADMIN01",
+        "date": "2026-05-08 11:20:15",
+        "items": [
+            {
+                "car_id": "XE001",
+                "quantity": 1,
+                "price": 850000000
+            }
+        ],
+        "total": 850000000
+    },
+    {
+        "id": "HD0002",
+        "customer_id": "KH001",
+        "employee_id": "ADMIN01",
+        "date": "2026-05-08 11:28:53",
+        "items": [
+            {
+                "car_id": "XE001",
+                "quantity": 3,
+                "price": 850000000
+            }
+        ],
+        "total": 2550000000
+    },
+    {
+        "id": "HD0003",
+        "customer_id": "KH001",
+        "employee_id": "ADMIN01",
+        "date": "2026-05-08 11:29:31",
+        "items": [
+            {
+                "car_id": "XE002",
+                "quantity": 5,
+                "price": 750000000
+            }
+        ],
+        "total": 3750000000
+    },
+    {
+        "id": "HD0004",
+        "customer_id": "KH002",
+        "employee_id": "ADMIN01",
+        "date": "2026-05-08 12:40:07",
+        "items": [
+            {
+                "car_id": "LC011",
+                "quantity": 1,
+                "price": 48.0
+            }
+        ],
+        "total": 48.0
+    },
+    {
+        "id": "HD0005",
+        "customer_id": "VIP014",
+        "employee_id": "ADMIN01",
+        "date": "2026-05-08 13:24:08",
+        "items": [
+            {
+                "car_id": "MCL002",
+                "quantity": 1,
+                "price": 18000000000.0
+            }
+        ],
+        "total": 18000000000.0
+    }
+]
