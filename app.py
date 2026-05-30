@@ -177,5 +177,59 @@ def statistics():
     stats = db.get_statistics()
     return render_template('statistics.html', stats=stats, user=session['user'])
 
+# ==================== ĐẶT CỌC ====================
+@app.route('/deposits')
+def deposits():
+    if 'user' not in session:
+        return redirect(url_for('login_page'))
+    
+    deposits_list = db.get_all_deposits()
+    cars_list = db.get_all_cars()
+    customers_list = db.get_all_customers()
+    return render_template('deposits.html', deposits=deposits_list, 
+                          cars=cars_list, customers=customers_list, 
+                          user=session['user'])
+
+@app.route('/create_deposit', methods=['POST'])
+def create_deposit():
+    if 'user' not in session:
+        return redirect(url_for('login_page'))
+    
+    customer_id = request.form['customer_id']
+    car_id = request.form['car_id']
+    deposit_amount = int(request.form['deposit_amount'])
+    note = request.form.get('note', '')
+    
+    success, result = db.create_deposit(customer_id, car_id, deposit_amount, note)
+    
+    if success:
+        flash(f'✅ Đặt cọc thành công! Mã đơn: {result}', 'success')
+    else:
+        flash(f'❌ {result}', 'error')
+    
+    return redirect(url_for('deposits'))
+
+@app.route('/complete_deposit/<deposit_id>')
+def complete_deposit(deposit_id):
+    if 'user' not in session:
+        return redirect(url_for('login_page'))
+    
+    success, msg = db.complete_deposit(deposit_id, session['user']['id'])
+    flash(msg, 'success' if success else 'error')
+    return redirect(url_for('deposits'))
+
+@app.route('/cancel_deposit/<deposit_id>')
+def cancel_deposit(deposit_id):
+    if 'user' not in session:
+        return redirect(url_for('login_page'))
+    
+    success, msg = db.cancel_deposit(deposit_id)
+    flash(msg, 'success' if success else 'error')
+    return redirect(url_for('deposits'))
+
+# ==================== CHẠY APP ====================
 if __name__ == '__main__':
-    app.run(debug=True)
+    try:
+        app.run(debug=True)
+    finally:
+        db.close()

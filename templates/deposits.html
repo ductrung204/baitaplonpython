@@ -1,0 +1,221 @@
+{% extends "layout.html" %}
+
+{% block title %}Đặt cọc xe - LUXURY CAR{% endblock %}
+
+{% block page_title %}💰 ĐẶT CỌC - NHẬN XE SAU{% endblock %}
+
+{% block content %}
+<style>
+    .status-pending {
+        background: rgba(243,156,18,0.2);
+        color: #f39c12;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        display: inline-block;
+    }
+    .status-completed {
+        background: rgba(46,204,113,0.2);
+        color: #2ecc71;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        display: inline-block;
+    }
+    .status-cancelled {
+        background: rgba(231,76,60,0.2);
+        color: #e74c3c;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        display: inline-block;
+    }
+    .btn-small {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 2px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 12px;
+    }
+    .btn-success-small {
+        background: #2ecc71;
+        color: white;
+    }
+    .btn-danger-small {
+        background: #e74c3c;
+        color: white;
+    }
+    .price {
+        color: #2ecc71;
+        font-weight: 600;
+    }
+    textarea {
+        width: 100%;
+        padding: 10px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 8px;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+    textarea:focus {
+        outline: none;
+        border-color: #667eea;
+    }
+    small {
+        font-size: 12px;
+    }
+</style>
+
+<!-- Modal đặt cọc -->
+<div class="modal" id="addDepositModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-hand-holding-usd"></i> Đặt cọc xe</h3>
+            <button class="close-modal" onclick="closeModal('addDepositModal')">&times;</button>
+        </div>
+        <form method="POST" action="/create_deposit">
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Khách hàng *</label>
+                <select name="customer_id" required>
+                    <option value="">-- Chọn khách hàng --</option>
+                    {% for cus in customers %}
+                    <option value="{{ cus.id }}">{{ cus.id }} - {{ cus.name }} ({{ cus.phone }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-car"></i> Chọn xe *</label>
+                <select name="car_id" id="carSelect" required>
+                    <option value="">-- Chọn xe --</option>
+                    {% for car in cars %}
+                    <option value="{{ car.id }}" data-price="{{ car.sell_price }}">
+                        {{ car.id }} - {{ car.name }} - {{ "{:,.0f}".format(car.sell_price) }}đ - Tồn: {{ car.quantity }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-coins"></i> Số tiền cọc (VNĐ) *</label>
+                <input type="number" name="deposit_amount" id="depositAmount" 
+                       placeholder="Nhập số tiền cọc" required>
+                <small id="priceHint" style="color: #aaa; display: block; margin-top: 5px;"></small>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-sticky-note"></i> Ghi chú</label>
+                <textarea name="note" rows="3" placeholder="Ghi chú thêm về đơn đặt cọc..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <i class="fas fa-check-circle"></i> Xác nhận đặt cọc
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Danh sách đơn đặt cọc -->
+<div class="data-card">
+    <div class="card-header">
+        <h3><i class="fas fa-list"></i> Danh sách đơn đặt cọc</h3>
+        <button class="btn btn-primary" onclick="openModal('addDepositModal')">
+            <i class="fas fa-plus"></i> Đặt cọc mới
+        </button>
+    </div>
+    
+    <div class="data-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mã đơn</th>
+                    <th>Khách hàng</th>
+                    <th>Xe</th>
+                    <th>Tiền cọc</th>
+                    <th>Còn lại</th>
+                    <th>Ngày đặt</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in deposits %}
+                <tr>
+                    <td><strong>{{ d.id }}</strong></td>
+                    <td>{{ d.customer_name }}<br><small>{{ d.customer_phone }}</small></td>
+                    <td>{{ d.car_name }}<br><small>{{ "{:,.0f}".format(d.car_price) }}đ</small></td>
+                    <td class="price">{{ "{:,.0f}".format(d.deposit_amount) }}đ</td>
+                    <td class="price">{{ "{:,.0f}".format(d.remaining_amount) }}đ</td>
+                    <td>{{ d.deposit_date.strftime('%d/%m/%Y') if d.deposit_date else '' }}</td>
+                    <td>
+                        {% if d.status == 'pending' %}
+                            <span class="status-pending">⏳ Chờ giao xe</span>
+                        {% elif d.status == 'completed' %}
+                            <span class="status-completed">✅ Đã giao xe</span>
+                        {% else %}
+                            <span class="status-cancelled">❌ Đã hủy</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if d.status == 'pending' %}
+                            <a href="/complete_deposit/{{ d.id }}" class="btn-small btn-success-small" 
+                               onclick="return confirm('Xác nhận đã giao xe và thanh toán đủ?')">
+                                <i class="fas fa-check"></i> Giao xe
+                            </a>
+                            <a href="/cancel_deposit/{{ d.id }}" class="btn-small btn-danger-small" 
+                               onclick="return confirm('Hủy đơn đặt cọc? Tiền cọc sẽ không được hoàn lại?')">
+                                <i class="fas fa-times"></i> Hủy
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8" style="text-align: center;">📭 Chưa có đơn đặt cọc nào</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function openModal(id) {
+        document.getElementById(id).classList.add('active');
+    }
+    
+    function closeModal(id) {
+        document.getElementById(id).classList.remove('active');
+    }
+    
+    const carSelect = document.getElementById('carSelect');
+    const depositInput = document.getElementById('depositAmount');
+    const priceHint = document.getElementById('priceHint');
+    
+    if (carSelect) {
+        carSelect.addEventListener('change', function() {
+            const selected = this.options[this.selectedIndex];
+            const price = selected.getAttribute('data-price');
+            if (price) {
+                const priceNum = parseInt(price);
+                const minDeposit = Math.floor(priceNum * 0.1);
+                const recDeposit = Math.floor(priceNum * 0.3);
+                priceHint.innerHTML = `
+                    💰 Giá xe: ${priceNum.toLocaleString()}đ<br>
+                    📌 Cọc tối thiểu: ${minDeposit.toLocaleString()}đ (10%)<br>
+                    ⭐ Nên cọc: ${recDeposit.toLocaleString()}đ (30%)
+                `;
+                depositInput.min = minDeposit;
+            }
+        });
+    }
+    
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.classList.remove('active');
+        }
+    }
+</script>
+{% endblock %}
